@@ -5,14 +5,14 @@
 using namespace std;
 
 const char CDfv[] = "Duom.txt";
-const int _cmax = 10;
+const int _cmax = 40;
 
 void Input(const char fv[], int &amount, int Taste[], float Weight[]);
 void Solution(int amount, int Taste[], float Weight[], int &good, float &sum, int &tasty, int &big);
 void Output(int good, float sum, int tasty, int big);
 
 int main() {
-	int amount = -3;
+	int amount = 0;
 	int Taste[_cmax];
 	float Weight[_cmax];
 	int good = 0;
@@ -26,30 +26,30 @@ int main() {
 }
 
 void Input (const char fv[], int &amount, int Taste[], float Weight[]) {
-	char answer = 'Ne';
+	char answer = 'T';
 	cout << "Iveskite zuvies svori ir skoni: " << endl;
 
-	while (answer = 'Ne') {
+	while (answer == 'T') {
 		cin >> Weight[amount];
 		cin >> Taste[amount];
 
-		amount+;
+		amount++;
 		cout << "Ar dar liko zuveliu? ";
 		cin >> answer;
 	}
 }
 
 void Solution (int amount, int Taste[], float Weight[], int &good, float &sum, int &tasty, int &big) {
-	for (int i = 1; i <= amount; i++) {
+	for (int i = 0; i < amount; i++) {
 		
-		if (Taste[i] == 1 && Weight[i] >= 5) {
+		if (Taste[i] == 1 && Weight[i] >= 1) {
 			good++;
 			sum += Weight[i];
 		}
 		if (Taste[i] == 1) {
 			tasty++;
 		}
-		if (Weight[i] >= 2) {
+		if (Weight[i] >= 1) {
 			big++;
 		}
 	
