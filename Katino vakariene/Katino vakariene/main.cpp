@@ -5,50 +5,58 @@
 using namespace std;
 
 const char CDfv[] = "Duom.txt";
-const int Cmax = 40;
-//------------------------------------
-void Ivestis(const char fv[], int &k, int Skon[], float Svor[]);
-void Sprendimas(int k, int Skon[], float Svor[], int &kiek, float &sum, int &skan, int &did);
-void Isvestis(int kiek, float sum, int skan, int did);
-//************************************
+const int _cmax = 40;
+
+void Input(const char fv[], int &amount, int Taste[], float Weight[]);
+void Solution(int amount, int Taste[], float Weight[], int &good, float &sum, int &tasty, int &big);
+void Output(int good, float sum, int tasty, int big);
+
 int main() {
-	int k=0, Skon[Cmax];
-	float Svor[Cmax];
-	Ivestis(CDfv, k, Skon, Svor);
-	int kiek=0, skan=0, did=0;
-	float sum=0;
-	Sprendimas(k, Skon, Svor, kiek, sum, skan, did);
-	Isvestis(kiek, sum, skan, did);
+	int amount = 0;
+	int Taste[_cmax];
+	float Weight[_cmax];
+	int good = 0;
+	int tasty = 0;
+	int big = 0;
+	float sum = 0;
+
+	Input (CDfv, amount, Taste, Weight);
+	Solution (amount, Taste, Weight, good, sum, tasty, big);
+	Output (good, sum, tasty, big);
 }
-//************************************
-void Ivestis(const char fv[], int &k, int Skon[], float Svor[]) {
-	char ats = 'T';
+
+void Input (const char fv[], int &amount, int Taste[], float Weight[]) {
+	char answer = 'T';
 	cout << "Iveskite zuvies svori ir skoni: " << endl;
-	while (ats == 'T') {
-		cin >> Svor[k];
-		cin >> Skon[k];
-		k++;
+
+	while (answer == 'T') {
+		cin >> Weight[amount];
+		cin >> Taste[amount];
+
+		amount++;
 		cout << "Ar dar liko zuveliu? ";
-		cin >> ats;
+		cin >> answer;
 	}
 }
-//------------------------------------
-void Sprendimas(int k, int Skon[], float Svor[], int &kiek, float &sum, int &skan, int &did) {
-	for (int i = 0; i < k; i++) {
-		if (Skon[i] == 1 && Svor[i] >= 1) {
-			kiek++;
-			sum += Svor[i];
+
+void Solution (int amount, int Taste[], float Weight[], int &good, float &sum, int &tasty, int &big) {
+	for (int i = 0; i < amount; i++) {
+		
+		if (Taste[i] == 1 && Weight[i] >= 1) {
+			good++;
+			sum += Weight[i];
 		}
-		if (Skon[i] == 1) {
-			skan++;
+		if (Taste[i] == 1) {
+			tasty++;
 		}
-		if (Svor[i] >= 1) {
-			did++;
+		if (Weight[i] >= 1) {
+			big++;
 		}
+	
 	}
 }
-//------------------------------------
-void Isvestis(int kiek, float sum, int skan, int did ) {
-	cout << kiek << " " << fixed << setprecision(2) << sum << endl;
-	cout << "Dideliu zuveliu - " << did << ", skaniu - " << skan;
+
+void Output (int good, float sum, int tasty, int big ) {
+	cout << good << " " << fixed << setprecision(2) << sum << endl;
+	cout << "Dideliu zuveliu - " << big << ", skaniu - " << tasty;
 }
